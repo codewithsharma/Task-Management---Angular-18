@@ -1,0 +1,232 @@
+<style>
+    .content {
+      overflow-x: hidden;
+      margin: auto;
+    }
+    .row2{
+      background-color: white;
+      padding: 30px;
+      border-radius: 40px;
+      overflow: hidden;
+      margin: 70px 0;
+    }
+  
+    .row1 {
+      margin-bottom: 20px;
+      gap: 20px;
+      display: grid;
+      width: 100%;
+      grid-template-columns: 2fr 1fr;
+    }
+  
+    .stats {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: 1fr 1fr;
+    }
+  
+    .card {
+      cursor: pointer;
+      background-color: white;
+      height: 200px;
+      display: flex;
+      gap: 30px;
+      justify-content: space-between;
+      border-radius: 20px;
+      align-items: center;
+      padding: 20px;
+      transition: all 0.4s ease-in-out;
+    }
+  
+    .card:hover {
+      background-color: aliceblue;
+      box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
+      img{
+        scale: 1.03;
+      }
+      .link{
+        color: #4370e9;
+        font-weight: 600;
+      }
+    }
+  
+    .detail {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+    }
+  
+    .title {
+      font-weight: 600;
+      font-size: 19px;
+    }
+  
+    .numbers {
+      font-size: 50px;
+    }
+  
+    .link {
+      color: gray;
+      font-weight: 500;
+    }
+  
+    .icon img {
+      width: 160px;
+      transition: all 0.3s ease-in-out;
+    }
+  
+   
+  
+    .notifications {
+      box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+      background-color: aliceblue;
+      padding: 20px;
+      border-radius: 10px;
+    }
+  
+    .add {
+      margin-bottom: -15px;
+    }
+  
+    /* Responsive Styles */
+    @media (max-width: 1024px) {
+      .row1 {
+        grid-template-columns: 1fr;
+      }
+  
+      .stats {
+        grid-template-columns: 1fr;
+      }
+  
+      .notifications {
+        margin-top: 20px;
+      }
+    }
+  
+    @media (max-width: 600px) {
+      .content {
+        padding: 10px;
+      }
+  
+      .card {
+        height: auto;
+        align-items: center;
+      }
+      .title{
+        font-size: 22px;
+      }
+     
+  
+      .icon img {
+        width: 100px;
+        margin-top: 10px;
+      }
+  .detail{
+    align-items: center;
+  }
+  
+      .numbers {
+        font-size: 36px;
+      }
+   .link, .add {
+        font-size: 16px;
+      }
+    }
+    .userName{
+      margin-bottom: 10px;
+      font-weight: 700;
+      font-size: 40px;
+    }
+    .task-list{
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: hidden;
+     overflow-x : scroll;
+     display: flex;
+     align-items: center;
+      gap: 20px;
+
+    }
+    .no-task{
+      width: 100%;
+
+      text-align: center;
+    }
+    @media (max-width: 600px) {
+   .task-list{
+    display: flex;
+    flex-direction: column;
+   
+  }
+  .row2{
+    padding: 5px ;
+  }
+  .heading{
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 25px;
+  }
+  .userName{
+    font-size: 26px;
+  }
+      
+    }
+  </style>
+<div class="content">
+    <div>
+      <h1 class="userName">Welcome, {{LocalLoggedInUserData.name}}</h1>
+      <div class="row1">
+        <div class="stats">
+          <div class="card" [routerLink]="['/tasks']" routerLinkActive="router-link-active" >
+            <div class="detail">
+              <p *ngIf="LocalLoggedInUserData.role =='admin'" class="title" >Total Tasks</p>
+              <p *ngIf="LocalLoggedInUserData.role =='user'" class="title" >My Tasks</p>
+              <h1 *ngIf="LocalLoggedInUserData.role =='admin'"class="numbers">{{totalTasks}}</h1>
+              <h1  *ngIf="LocalLoggedInUserData.role =='user' "  class="numbers">{{ LoggedInUserData.task.length}}</h1>
+              <p class="link">View Users</p>
+            </div>
+            <div class="icon">
+              <img src="https://cdn-icons-png.flaticon.com/128/1527/1527478.png" alt="Total Tasks Icon">
+            </div>
+          </div>
+          <div *ngIf="LocalLoggedInUserData.role=='admin'" class="card" [routerLink]='["/users"]' >
+            <div class="detail">
+              <p class="title">Total Users</p>
+              <h1 class="numbers">{{totalUser}}</h1>
+              <p class="link">View Users</p>
+            </div>
+            <div class="icon">
+              <img src="https://cdn-icons-png.flaticon.com/128/16683/16683419.png" alt="Total Users Icon">
+            </div>
+          </div>
+          <div class="card"  *ngIf="LocalLoggedInUserData.role=='admin'"  [routerLink]='["/add-user"]' >
+            <div class="detail">
+              <h1 class="add">Add User</h1>
+              <p class="link">Create new user account</p>
+            </div>
+            <div class="icon"  >
+              <img src="https://cdn-icons-png.flaticon.com/128/10337/10337579.png" alt="Add User Icon">
+            </div>
+          </div>
+          <div class="card"[routerLink]='["/add-task"]'>
+            <div class="detail">
+              <h1 class="add">Add Task</h1>
+              <p class="link">Assign task to user</p>
+            </div>
+            <div class="icon">
+              <img src="https://cdn-icons-png.flaticon.com/128/8191/8191558.png" alt="Add Task Icon">
+            </div>
+          </div>
+        </div>
+        <div class="notifications">Notifications</div>
+      </div>
+      <div *ngIf="LocalLoggedInUserData.role== 'user'" class="row2">
+        <h1 class="heading">Latests Tasks</h1>
+        <div class="task-list" >
+          <h2 class="no-task" *ngIf="false">No Task Assigned  !! </h2>
+          <app-task-card  *ngFor="let task of LoggedInUserData.task" [task] ="task" ></app-task-card>
+        </div>
+      </div>
+    </div>
+  </div>

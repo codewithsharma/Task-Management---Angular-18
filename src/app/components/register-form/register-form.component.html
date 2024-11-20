@@ -1,0 +1,121 @@
+<style>
+
+    .formBox{
+        box-shadow: 10px 10px 10px rgba(0,0,0,0.2);
+        border-radius: 24px;
+        background-color: white;
+        border: 1px solid rgba(236, 236, 236, 0.656);
+    }
+    form{
+        display: flex;
+        width: 450px;
+        flex-direction: column;
+        gap: 8px;
+        padding: 20px;
+    }
+    .form-row{
+
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+    .submit-btn{  
+        border: none;
+        outline: none;
+        border-radius: 8px;
+        height: 35px;
+        background: #3569f7;
+        color: white;
+        font-weight: 500;
+        transition: all 0.3s ease-in-out;
+        margin-top: 10px;
+    }
+    .submit-btn:hover{
+        background: #2c4ebf;
+        transform: scale(1.03);
+    }
+.error-msg{
+    font-weight: 500;
+    font-size: 13px;
+    color: red;
+    margin-top: 1px;
+}
+a{
+    cursor: pointer;
+    font-weight: 600;
+    color: #2a58ed;
+    transition: all 0.3s ease-in-out;
+
+}
+a:hover{
+    color: blue;
+}
+.register-link{
+    color: grey;
+    font-weight: 500;
+    font-size: 13px;
+}
+h1{
+    font-size: 36px;
+}
+@media (max-width: 600px) {
+    .formBox{
+        width: 90vw;
+       box-shadow: none;
+       border: none;
+       padding: 0;
+       margin: 10px;
+    }
+    form{
+        margin: auto;
+       width: 90%;
+       padding: 20px;
+
+      
+    }
+  
+}
+
+</style>
+<div class="formBox">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <h1>Register here ! </h1>
+        <div class="form-row">
+            <label for="name">Name</label>
+            <input type="text" name="name" placeholder="" formControlName="name" id="name" />
+            <span class="error-msg" *ngIf="
+          !registerForm.controls.name.valid &&
+          (this.valid || registerForm.controls.name.touched)
+        ">This is required</span>
+        </div>
+        <div class="form-row">
+            <label for="email">Email</label>
+            <input type="email" name="email" placeholder="" formControlName="email" id="email" />
+            <span class="error-msg" *ngIf="registerForm.controls.email.hasError('email')">Accept email only</span>
+
+            <span class="error-msg" *ngIf="
+          !registerForm.controls.email.valid &&
+          (this.valid || registerForm.controls.email.touched)
+        ">This is required</span>
+        </div>
+        <div class="form-row">
+            <label for="password">Password</label>
+            <input type="password" name="password" placeholder="" formControlName="password" id="password"  (keyup)="isPasswordConfirmed()"/>
+            <span class="error-msg" *ngIf="
+            !registerForm.controls.password.valid &&
+            (this.valid || registerForm.controls.password.touched)
+          ">This is required</span>
+        </div>
+        <div class="form-row">
+            <label for="confirmPassword">Confirn Password</label>
+            <input type="password" name="confirmPassword" placeholder="" formControlName="confirmPassword" (keyup)="isPasswordConfirmed()" id="confirmPassword" />
+            <span class="error-msg" *ngIf="
+            !registerForm.controls.confirmPassword.valid &&
+            (this.valid || registerForm.controls.confirmPassword.touched)
+          ">This is required</span>
+          <span class="error-msg" *ngIf="isPasswordMatched && registerForm.value.confirmPassword">Password not matched</span>
+        </div>
+        <button class="submit-btn" type="submit">Submit</button>
+        <p class="login-link">Already have an account ?  <a  [routerLink]='["/login"]'  >Login here </a> </p> 
+    </form>
+</div>

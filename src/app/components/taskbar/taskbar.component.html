@@ -1,0 +1,130 @@
+<style>
+    .taskbar{
+        z-index: 1000;
+        position: fixed;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        left: 0;
+    }
+    .menu{
+        border-radius: 0  0 50% 50%;
+        font-size: 25px;
+        padding: 6px;
+        color: white;
+        width: 40px;
+        height: 40px;
+
+    }
+    .active{
+        box-shadow: 10px 10px 10px rgba(0,0,0,0.3);
+        color: #3569f7;
+        background-color: #ffffff;
+    }
+    .menubar{
+        gap: 20px;
+        border-radius: 10px 10px  0 0;
+        padding: 0 30px 10px;
+        background-color: #3569f7;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      
+    }
+    .tooltip{
+        background-color: #4370e9;
+        padding: 5px 10px;
+        border-radius: 10px;
+        color: white;
+        top: -45px;
+   opacity: 0;
+
+        font-weight: 600;
+        position: absolute;
+        width: 130px;
+        left: -45px;
+transition: all 0.s ease-in;
+
+    }
+    .menuIcon{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        position: relative;
+    }
+    a{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    /* .menuIcon:hover{
+        transition: all 0.3s ease-in-out;
+     
+        .tooltip{
+      opacity: 100;
+        }
+
+    } */
+    .menu:hover~.tooltip
+    {
+        opacity: 100;
+    }
+    @media (max-width: 600px) {
+        .menubar{
+         width: 100vw;
+        }}
+</style>
+    <nav class="taskbar">
+        <div class="menubar" >
+<div class="menuIcon">
+    <a routerLink="/dashboard" routerLinkActive="active"  class="menu" href=""><i class="fa-solid fa-house"></i></a>
+    <div class="tooltip">Home</div>
+</div>
+<div class="menuIcon" *ngIf="userData.role=='admin'">
+    <a routerLink="/tasks" routerLinkActive="active"  class="menu" href="" ><i class="fa-solid fa-list-check"></i></a>
+    <div class="tooltip">
+        Tasks
+    </div>
+</div>
+<div class="menuIcon" *ngIf="userData.role=='user'">
+    <a routerLink="/my-tasks" routerLinkActive="active"  class="menu" href="" ><i class="fa-solid fa-list-check"></i></a>
+    <div class="tooltip">
+        My Tasks
+    </div>
+</div>
+
+
+<div class="menuIcon"  *ngIf="userData.role=='admin'">
+    <a routerLink="/users" routerLinkActive="active"  class="menu" href=""><i class="fa-solid fa-users"></i></a>
+    <div class="tooltip">Manage Users</div>
+
+</div>
+<div class="menuIcon"  *ngIf="userData.role=='admin'">
+    <a routerLink="/add-user" routerLinkActive="active"  class="menu" href="" ><i class="fa-solid fa-user-plus"></i></a>
+    <div class="tooltip">
+       Add User
+    </div>
+</div>
+<div class="menuIcon" >
+    <a routerLink="/add-task" routerLinkActive="active"  class="menu" href="" ><i class="fa-solid fa-folder-plus"></i></a>
+    <div class="tooltip">
+       Add Task
+    </div>
+</div>
+
+<div class="menuIcon">
+    <a routerLink="login" routerLinkActive="active"  class="menu" href=""><i class="fa-solid fa-user"></i></a>
+    <div class="tooltip">
+        Profile
+    </div>
+</div>
+<!-- <div class="menuIcon">
+    <a routerLink="register" routerLinkActive="active"  class="menu" href=""><i class="fa-solid fa-gear"></i></a>
+    <div class="tooltip">Edit Profile</div>
+</div> -->
+
+        </div>
+    </nav>

@@ -1,0 +1,38 @@
+<style>
+    .screen{
+        background-color: red;
+    }
+    .sweetAlert
+    {
+        display: none;
+        background-color: #3569f7;
+        color: white;
+        font-weight: 500;
+        border-radius: 10px;
+        position: fixed;
+        width: fit-content;
+        padding: 15px;
+        right: 10px;
+        top: 12vh;
+        z-index: 1000;
+    }
+    .block{
+        display: flex;
+    }
+    .error{
+        background-color: red;
+    }
+    .success{
+        background-color: green
+    }
+</style>
+
+<div id="SweetAlert" class="sweetAlert" >{{toastContent.message}}</div>
+
+
+
+ 
+        
+            <router-outlet></router-outlet>
+         
+

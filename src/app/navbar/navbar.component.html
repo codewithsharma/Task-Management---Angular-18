@@ -1,0 +1,108 @@
+<style>
+  nav {
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+
+    background-color: #3569f7;
+    margin: auto;
+  }
+  .nav-bar {
+  
+    padding: 10px 20px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+  }
+  .logo h1 {
+    color: white;
+    font-weight: 500;
+    font-size: 30px;
+  }
+  i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    color: #3569f7;
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    font-size: 30px;
+    border-radius: 30%;
+  }
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .userProfile {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .userProfile i {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    font-size: 20px;
+  }
+  @media (max-width: 600px) {
+    .userProfile {
+      display: none;
+    }
+    .nav-bar{
+      padding:5px 25px ;
+    }
+    .logo{
+      margin: 0;
+
+    }
+
+  }
+  button {
+    background-color: white;
+    padding: 6px 10px;
+    border: 2px solid #3569f7;
+    outline: none;
+    border-radius: 12px;
+    color: #3569f7;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+  }
+  button:hover {
+    background-color: #3569f7;
+    color: white;
+    border: 2px solid white;
+  }
+  .username {
+    font-size: 14px;
+    color: white;
+    font-weight: 500;
+  }
+</style>
+<nav class="navbar">
+  <div class="nav-bar">
+    <div class="logo" routerLink=""  >
+      <i class="fa-solid fa-paper-plane"></i>
+      <h1>Tasker</h1>
+    </div>
+    <div class="nav-right">
+      <div class="userProfile">
+        <i class="fa-solid fa-user"></i>
+        <p class="username">{{UserData.name ?? "Username"}}  </p>
+      </div>
+      <button class="logout"(click)="loggedOut()" >Logout</button>
+    </div>
+  </div>
+</nav>

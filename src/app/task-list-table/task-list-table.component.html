@@ -1,0 +1,47 @@
+<div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>S no</th>
+          <th>Id</th>
+          <th>Title</th>
+          <th>Assigned By</th>
+          <th>Assigned To</th>
+          <th>Due Date</th>
+          <th>Status</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of paginatedTasks; let i = index">
+          <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+          <td>{{ task._id }}</td>
+          <td>{{ task.title }}</td>
+          <td>{{ task.assignedBy.name }}</td>
+          <td>{{ task.assignedTo.name }}</td>
+          <td>{{ task.dueDate }}</td>
+          <td>{{ task.status }}</td>
+          <td>
+            <div>
+              <img class="editIcon" src="https://cdn-icons-png.flaticon.com/128/10336/10336582.png" alt="">
+            </div>
+          </td>
+          <td>
+            <div>
+              <img class="deleteIcon" src="https://cdn-icons-png.flaticon.com/128/9068/9068885.png" alt="">
+            </div>
+          </td>
+        
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Pagination Controls -->
+    <div class="pagination-controls">
+      <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+    </div>
+  </div>
+  

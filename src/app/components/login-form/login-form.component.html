@@ -1,0 +1,111 @@
+<style>
+
+    .formBox{
+        background-color: white;
+        box-shadow: 10px 10px 10px rgba(0,0,0,0.2);
+        padding: 20px;
+        width: 400px;
+        border-radius: 24px;
+        border: 1px solid rgba(236, 236, 236, 0.656);
+    }
+    form{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+    .form-row{
+
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+    .submit-btn{
+        border: none;
+        outline: none;
+        border-radius: 8px;
+        height: 35px;
+        background: #3569f7;
+        color: white;
+        font-weight: 500;
+        transition: all 0.3s ease-in-out;
+        margin-top: 10px;
+    }
+    .submit-btn:hover{
+        background: #2c4ebf;
+        transform: scale(1.03);
+    }
+.error-msg{
+    font-weight: 500;
+    font-size: 13px;
+    color: red;
+    margin-top: 1px;
+}
+a{
+    cursor: pointer;
+    font-weight: 600;
+    color: #2a58ed;
+    transition: all 0.3s ease-in-out;
+
+}
+a:hover{
+    color: blue;
+}
+.register-link{
+    color: grey;
+    font-weight: 500;
+    font-size: 13px;
+}
+h1{
+    font-size: 36px;
+}
+@media (max-width: 600px) {
+    .formBox{
+        width: 90vw;
+       box-shadow: none;
+       border: none;
+       padding: 0;
+       margin: 10px;
+    }
+    form{
+        margin: auto;
+       width: 90%;
+       padding: 20px;
+      
+    }
+  
+}
+option{
+    padding: 5px;
+    height: 30px;
+}
+
+
+</style>
+<div class="formBox">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <h1>Login </h1>
+        <div class="form-row">
+            <label for="email">Email</label>
+            <input type="email" name="email" placeholder="" formControlName="email" id="email" />
+            <span class="error-msg" *ngIf="loginForm.controls.email.hasError('email')">Accept email only</span>
+
+            <span class="error-msg" *ngIf="
+          !loginForm.controls.email.valid &&
+          (this.valid || loginForm.controls.email.touched)
+        ">This is required</span>
+        </div>
+        <div class="form-row">
+            <label for="password">Password</label>
+            <input type="password" name="password" placeholder="" formControlName="password" id="password"/>
+            <span class="error-msg" *ngIf="
+            !loginForm.controls.password.valid &&
+            (this.valid || loginForm.controls.password.touched)
+          ">This is required</span>
+        </div>
+       
+        <button class="submit-btn" type="submit">Log in</button>
+        <p class="register-link">New to Tasker !!  <a  routerLink='/register'  > Register here </a> </p> 
+
+    </form>
+</div>
