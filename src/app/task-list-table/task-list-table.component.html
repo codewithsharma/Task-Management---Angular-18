@@ -14,8 +14,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let task of paginatedTasks; let i = index">
-          <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+        <tr [ngClass]="{
+          'inProgress': task.status == 'In Progress',
+          'completed': task.status == 'Completed',
+          'not-completed': task.status != 'In Progress' && task.status != 'Completed'
+        }" *ngFor="let task of paginatedTasks; let i = index">
+                  <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
           <td>{{ task._id }}</td>
           <td>{{ task.title }}</td>
           <td>{{ task.assignedBy.name }}</td>
@@ -29,7 +33,7 @@
           </td>
           <td>
             <div>
-              <img class="deleteIcon" src="https://cdn-icons-png.flaticon.com/128/9068/9068885.png" alt="">
+              <img class="deleteIcon" (click)="openConfirmationModal(task._id)" src="https://cdn-icons-png.flaticon.com/128/9068/9068885.png" alt="">
             </div>
           </td>
         
@@ -44,4 +48,6 @@
       <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
     </div>
   </div>
+  <app-confirmation-modal (actionConfirmed)="handleModalAction($event)"></app-confirmation-modal>
+
   

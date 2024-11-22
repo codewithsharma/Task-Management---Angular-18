@@ -79,3 +79,9 @@ tbody tr:nth-child(even) {
 .editIcon:hover, .deleteIcon:hover{
     scale: 1.1;
 }
+.completed{
+    background-color: rgb(211, 255, 211);
+}
+.inProgress{
+    background-color: rgb(255, 235, 197);
+}

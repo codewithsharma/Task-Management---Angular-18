@@ -27,6 +27,8 @@ export class TaskFormComponent implements OnInit {
   http = inject(HttpClient);
   router =inject(Router)
   dropdownList: any = [];
+  localStorageData:any = localStorage.getItem("data")
+  LoggedUserData= JSON.parse(this.localStorageData)
   async getAllUsers() {
     await this.http
       .get('http://localhost:4000/users/get-all-users-only')
@@ -93,11 +95,11 @@ export class TaskFormComponent implements OnInit {
   taskForm = this.formBuilder.group({
     title: ['', [Validators.required, Validators.minLength(4)]],
     description: ['', [Validators.required, Validators.minLength(8)]],
-    assignedBy: ['673d950090149af4683ca500'],
+    assignedBy: [this.LoggedUserData.userId],
     assignedTo: [[], Validators.required],
     dueDate: ['', Validators.required],
     dueTime: ['', Validators.required],
   });
 }
-
+   
 // user name

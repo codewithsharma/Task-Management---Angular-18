@@ -14,6 +14,8 @@ import { TaskListTableComponent } from './task-list-table/task-list-table.compon
 import { AddUserFormComponent } from './pages/add-user-form/add-user-form.component';
 import { roleAuthGuard } from './service/role-auth.guard';
 import { NotFound403Component } from './pages/not-found403/not-found403.component';
+import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 export const routes: Routes = [
     {
@@ -75,6 +77,9 @@ export const routes: Routes = [
     }, {
         path: "register",
         component: RegisterPageComponent
-    }, 
+    }, {
+        path:"edit",
+        component:EditUserComponent
+    }
 
 ];
